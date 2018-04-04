@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.ComponentModel;
+
+public class TriggerEvent : MonoBehaviour {
+
+    public GameObject lightBumb = null;
+    public GameObject wall = null;
+    public AudioSource lightBulbOn;
+    public AudioClip clip;
+
+    public void Awake()
+    {
+        lightBulbOn = GetComponent<AudioSource>();
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "Player")
+        {
+            lightBumb.SetActive(true);
+            lightBulbOn.Play();
+            wall.GetComponent<ObjectScaling>().EnableScale();
+        }
+    }
+
+     void OnTriggerExit(Collider other)
+    {
+        if (other.name == "Player")
+        {
+            lightBumb.SetActive(false);
+            lightBulbOn.Stop();
+            wall.GetComponent<ObjectScaling>().DisableScale();
+        }
+    }
+}
