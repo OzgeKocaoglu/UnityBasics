@@ -1,0 +1,68 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour {
+
+    public float speed = 0.5f;
+    public float R_speed = 60.0f;
+    public bool canMoveSideWays = false;
+
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+       Movement();
+       
+       
+
+		
+	}
+
+    void Movement()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            Debug.Log("W'a basildi");
+            this.transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+        }
+
+        else if (Input.GetKey(KeyCode.S))
+        {
+            Debug.Log("S'e basildi");
+            this.transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
+        }
+
+        else if (Input.GetKey(KeyCode.A))
+        {
+            if (canMoveSideWays)
+            {
+                Debug.Log("A'a basildi");
+                this.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+            }
+            else
+            {
+                this.transform.Rotate(new Vector3(0, R_speed * Time.deltaTime, 0));
+            }
+        }
+
+        else if (Input.GetKey(KeyCode.D))
+        {
+            if (canMoveSideWays)
+            {
+                Debug.Log("D'e basildi");
+                this.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+            }
+            else
+            {
+                this.transform.Rotate(new Vector3(0, -R_speed * Time.deltaTime, 0));
+            }
+
+        }
+    }
+}
